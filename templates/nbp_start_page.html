@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Analizator walut NBP </title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+          integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}">
+</head>
+
+
+<body style="background-color:powderblue;">
+
+<div align="center">
+    <div class="main_body"
+         style="text-align: center;
+                align: center;
+                padding: 10px;
+                width: 500px;
+                height: 300px;
+                background-color: powderblue;}" >
+
+        <h1>Wybierz przedział czasowy i przejdź dalej</h1>
+
+        <form class="pure-form" method="POST">
+            <p>Od:
+            <input type="date" name="start_date" value="2023-05-05"/></p>
+            <p>Do:
+            <input type="date" name='stop_date' value="2023-05-05"/> </p>
+            <button type="submit" name="button" value="True">Zatwierdź</button>
+
+        </form>
+    </div>
+
+    <div style="padding: 10px;width: 500px;float: center;min-height: 100px; background-color: powderblue;">
+        {% if start and stop %}
+            <p>Data początkowa: {{ start }} </p>
+            <p>Data końcowa: {{ stop }} </p>
+        {% endif %}
+        {% if err%}
+            <p> Blad: Bledny przedzial czasowy! Prosze o zmiane daty!</p>
+        {% endif %}
+    </div>
+
+    <div style="text-align: right;
+                align: right;
+                padding: 10px;
+                width: 500px;
+                height: 50px;
+                background-color: powderblue;}" >
+        <form class="pure_form" method="POST" action="/download">
+            {% if button==True %}
+                <button type="submit" name="button1" value="True">Przejdź dalej</button><br>
+            {% endif %}
+        </form>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

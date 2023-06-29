@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pobranie danych</title>
+</head>
+
+<body style="background-color:powderblue;">
+    <div align="center" >
+        <div style="text-align: center;
+            align: center;
+            padding: 10px;
+            width: 800px;
+            height: 230;
+            background-color: powderblue;}" >
+            <div align="left">
+            {% if start and stop %}
+                <p>Data początkowa: {{ start }} </p>
+                <p>Data końcowa: {{ stop }} </p>
+            {% endif %}
+            </div>
+            <div>
+            {% if html_data %}
+                <form method="POST">
+                    <div style="float:left">
+                    <select name= 'selection' >
+                        {% if last_value %}
+                            <option value='{{last_value[0]}}' SELECTED>{{last_value[0]}}</option>"
+                        {% endif %}
+
+                        {% for i in currency %}
+                            {% if i!= last_value[0] %}
+                                <option value="{{i}}">{{i}}</option>"
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <select name= 'selection1'>
+                        {% if last_value %}
+                            <option value='{{last_value[1]}}' SELECTED>{{last_value[1]}}</option>"
+                        {% endif %}
+
+                        {% for i in currency %}
+                            {% if i!= last_value[1] %}
+                                <option value="{{i}}">{{i}}</option>"
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+
+                    <select name= 'selection2'>
+                        {% if last_value %}
+                            <option value='{{last_value[2]}}' SELECTED>{{last_value[2]}}</option>"
+                        {% endif %}
+
+                        {% for i in currency %}
+                            {% if i!= last_value[2] %}
+                                <option value="{{i}}">{{i}}</option>"
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                 <br>
+                    </div>
+                    <div align="right">
+                    <button type="submit" name="button2" value="True" style="float:left">WYŚWIETL</button><br><br><br>
+                    </div>
+
+                <div align="bottom" style="float:left">
+                <button type="submit" name="button3" value="True">Pokaż całkowite zestawienie w tabeli</button>
+                </div>
+                </form>
+                <div align="left" style="height= 50 width = 900 float: left">
+                    <form class="pure_form" method="POST" action="/download">
+                            <button type="submit" name="button4" value="True">Reset</button>
+                    </form>
+                    <form class="pure_form" method="POST" action="/">
+                            <button type="submit" name="button1" value="True">Powrót</button>
+                    </form>
+
+                </div>
+
+            {% endif %}
+            </div>
+        </div>
+
+        <div class = "container" align="center" style="padding: 10px;width: 800px;float: center;min-height: 50">
+            {% if graph %}
+            <embed type = "image/svg+xml" src = {{graph|safe}} style = 'max-width = 200px, max-height=50'/>
+            {% endif %}
+        </div>
+
+    </div>
+
+</body>
+</html>
